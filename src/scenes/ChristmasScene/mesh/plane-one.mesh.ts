@@ -1,22 +1,23 @@
-import { Mesh } from "three";
-
-import PlaneOneGeometry from '../geometry/plane-one.geometry';
-import PlaneOneMaterial from '../materials/plane-one.material';
+import { BoxGeometry, Mesh, MeshBasicMaterial, ShadowMaterial } from "three";
 
 class PlaneOneMesh {
 	private mesh: Mesh;
-	private planeOneGeometry: PlaneOneGeometry;
-	private planeOneMaterial: PlaneOneMaterial;
+	private planeOneGeometry: BoxGeometry;
+	// private planeOneMaterial: MeshBasicMaterial;
+	private shadowMaterial: ShadowMaterial;
 
 	constructor() {
-		this.planeOneGeometry = new PlaneOneGeometry();
-		this.planeOneMaterial = new PlaneOneMaterial();
-		this.mesh = new Mesh(this.planeOneGeometry.get(), this.planeOneMaterial.get());
+		this.planeOneGeometry = new BoxGeometry(100, .1, 100);
+		// this.planeOneMaterial = new MeshBasicMaterial({ color: 0x393839, wireframe: true });
+		this.shadowMaterial = new ShadowMaterial({ color: 0xeeeeee });
+		this.shadowMaterial.opacity = 0.5;
+		this.mesh = new Mesh(this.planeOneGeometry, this.shadowMaterial);
+		this.mesh.receiveShadow = true;
 		this.position();
 	}
 
 	private position(): void {
-		this.mesh.rotateX(Math.PI / 2);
+		
 	}
 
 	public get(): Mesh {

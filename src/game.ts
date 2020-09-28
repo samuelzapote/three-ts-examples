@@ -16,7 +16,7 @@ class Game {
 	private animate = (): void => {
 		// this.mainScene.animate();
 		// this.lineScene.animate();
-		this.christmasScene.animate();
+		this.christmasScene.render();
 		requestAnimationFrame(this.animate);
 	}
 

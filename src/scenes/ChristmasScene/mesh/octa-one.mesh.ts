@@ -1,16 +1,41 @@
-import { FlatShading, Mesh, MeshStandardMaterial, OctahedronGeometry } from "three";
+import { Mesh, MeshStandardMaterial, OctahedronGeometry } from "three";
 
-class OctaOne {
+class OctaOneMesh {
   private geometry: OctahedronGeometry;
   private material: MeshStandardMaterial;
+  private mesh: Mesh;
 
-  constructor() {
-    this.geometry = new OctahedronGeometry(10, 1);
+  constructor(geometryRadius: number, materialColor: number) {
+    this.geometry = new OctahedronGeometry(geometryRadius, 1);
     this.material = new MeshStandardMaterial({
-      color: 0xff0051,
+      color: materialColor,
       flatShading: true,
       metalness: 0,
-      roughness: 1
+      roughness: 0.8
     });
+    this.mesh = new Mesh(this.geometry, this.material);
+    this.setup();
+  }
+
+  public get(): Mesh {
+    return this.mesh;
+  }
+
+  private setup(): void {
+    this.mesh.castShadow = true;
+  }
+
+  public offsetPositionX(amount: number): void {
+    this.mesh.position.x += amount;
+  }
+  
+  public offsetPositionY(amount: number): void {
+    this.mesh.position.y += amount;
+  }
+
+  public rotatePositionZ(amount: number): void {
+    this.mesh.rotateZ(Math.PI / amount);
   }
 }
+
+export default OctaOneMesh;
