@@ -10,7 +10,7 @@ class Decoration extends Group {
 	constructor() {
 		super();
 		this.bauble = new Mesh(
-			this.addNoise(new OctahedronGeometry(12, 1), 2),
+			Decoration.addNoise(new OctahedronGeometry(12, 1), 2),
 			new MeshStandardMaterial({
 				color: this.colors[Math.floor(Math.random() * this.colors.length)],
 				flatShading: true,
@@ -25,7 +25,7 @@ class Decoration extends Group {
 		this.add(this.bauble);
 
 		this.shapeOne = new Mesh(
-			this.addNoise(new CylinderGeometry(4, 6, 10, 6, 1), 0.5),
+			Decoration.addNoise(new CylinderGeometry(4, 6, 10, 6, 1), 0.5),
 			new MeshStandardMaterial({
 					color: 0xf8db08,
 					flatShading: true,
@@ -42,7 +42,7 @@ class Decoration extends Group {
 		this.rotationPosition = Math.random();
 	}
 
-	private addNoise(geometry: Geometry, noiseX: number, noiseY?: number, noiseZ?: number): Geometry  {
+	public static addNoise(geometry: Geometry, noiseX: number, noiseY?: number, noiseZ?: number): Geometry  {
     noiseX = noiseX || 2;
     noiseY = noiseY || noiseX;
     noiseZ = noiseZ || noiseY;
